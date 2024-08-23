@@ -4,12 +4,14 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Category;
-use App\Models\JobData;
+use App\Models\Testimonial;
+
 
 class PublicController extends Controller
 {
     public function index()
     {
+
         return view('public.index');
     }
     public function about()
@@ -28,28 +30,16 @@ class PublicController extends Controller
     }
     public function testimonial()
     {
-        return view('public.testimonial');
+        $testimonials = Testimonial::where('published', 1)->get();
+        return view('public.testimonial',compact('testimonials'));
     }
     public function joblist()
     {
         return view('public.job-list');
     }
-    
-    public function jobdetails(String $id)
+    public function jobdetails()
     {
-        $job=JobData::with(['company'])->findOrFail($id);
-        dd($job);
-        return view('public.job-detail',compact('job'));
-    }
-
-    public function jobApply(Request $request)
-    {
-    dd("send email to the admin who has created the job");
-    }
-
-    public function error()
-    {
-        return view('public.404');
+        return view('public.job-detail');
     }
-
+    
 }
