@@ -14,9 +14,9 @@
 
                 <div class="mb-5">
                     <h4 class="mb-3">Job description</h4>
-                    <p>{{$job->discription}}.</p>
+                    <p>{{$job->description}}.</p>
                     <h4 class="mb-3">Responsibility</h4>
-                    <p>{{$job->Responsibility}}r</p>
+                    <p>{{$job->responsability}}r</p>
                     {{-- <ul class="list-unstyled">
                         <li><i class="fa fa-angle-right text-primary me-2"></i>Dolor justo tempor duo ipsum accusam</li>
                         <li><i class="fa fa-angle-right text-primary me-2"></i>Elitr stet dolor vero clita labore gubergren</li>
@@ -25,7 +25,7 @@
                         <li><i class="fa fa-angle-right text-primary me-2"></i>Diam diam stet erat no est est</li>
                     </ul> --}}
                     <h4 class="mb-3">Qualifications</h4>
-                    <p>{{$job->qualifications}}</p>
+                    <p>{{$job->qualification}}</p>
                     {{-- <ul class="list-unstyled">
                         <li><i class="fa fa-angle-right text-primary me-2"></i>Dolor justo tempor duo ipsum accusam</li>
                         <li><i class="fa fa-angle-right text-primary me-2"></i>Elitr stet dolor vero clita labore gubergren</li>
@@ -75,7 +75,7 @@
                 </div>
                 <div class="bg-light rounded p-5 wow slideInUp" data-wow-delay="0.1s">
                     <h4 class="mb-4">Company Detail</h4>
-                    <p class="m-0">{{$job->company->description}}.</p>
+                    <p class="m-0">{{$job->company?->description}}</p>
                 </div>
             </div>
         </div>
