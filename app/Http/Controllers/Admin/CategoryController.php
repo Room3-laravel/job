@@ -32,19 +32,19 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        
+
         $data = $request->validate([
             'category_name'=> 'required|string',
             'image' =>'required|mimes:png,jpg,jpeg|max:2048',
-  
+
         ]);
-       
+
         if($request->hasFile('image')){
             $data['image'] = $this->uploadFile($request->image,'assets/img');
         }
        Category::create($data);
        return 'send successfully';
-       dd($data);
+    //    dd($data);
     }
 
     /**

@@ -14,6 +14,6 @@ class Category extends Model
         ];
 
         public function Job() {
-            return $this->hasOne(JobData::class);
+            return $this->hasMany(JobData::class);
     }
 }

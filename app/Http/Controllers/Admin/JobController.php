@@ -21,7 +21,7 @@ class JobController extends Controller
         $jobs=JobData::with('category')->get();
         return view ('admin.jobs',compact('jobs'));
     }
- 
+
 
     /**
      * Show the form for creating a new resource.
@@ -78,7 +78,7 @@ class JobController extends Controller
         $categories = Category::all();
         return view('admin.edit_job',compact('job','categories'));
     }
-   
+
     /**
      * Update the specified resource in storage.
      */
@@ -99,22 +99,23 @@ class JobController extends Controller
              'image' =>'sometimes|mimes:png,jpg,jpeg|max:2048',
 
         ]);
-       
+
         if($request->hasFile('image')){
             $data['image'] = $this->uploadFile($request->image,'assets/img');
-        } 
+        }
         $data['published']=isset($request->published);
                 JobData::where('id',$id)->update($data);
                 return redirect()->route('jobs.index');
                // dd($data);
     }
-  
+
 
     /**
      * Remove the specified resource from storage.
      */
     public function destroy(string $id)
     {
-        //
+        JobData::findOrFail($id)->delete();
+        return redirect()->route('jobs.index');
     }
 }

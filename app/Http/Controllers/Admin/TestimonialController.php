@@ -1,13 +1,10 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
-use App\Models\JobData;
-use App\Models\Category;
 use Illuminate\Http\Request;
 
-class AdminController extends Controller
+class TestimonialController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -37,11 +34,9 @@ class AdminController extends Controller
      * Display the specified resource.
      */
     public function show(string $id)
-{
-   $job=JobData::with('category')->findOrFail($id);
-    //  dd($job);
-     return view('admin.job_details', compact('job'));
-}
+    {
+        //
+    }
 
     /**
      * Show the form for editing the specified resource.

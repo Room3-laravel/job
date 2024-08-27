@@ -34,22 +34,19 @@ class PublicController extends Controller
     {
         return view('public.job-list');
     }
-    
-    public function jobdetails(String $id)
-    {
+
+
+    public function jobdetails(string $id){
         $job=JobData::with(['company'])->findOrFail($id);
-        dd($job);
         return view('public.job-detail',compact('job'));
-    }
-
-    public function jobApply(Request $request)
-    {
-    dd("send email to the admin who has created the job");
-    }
-
-    public function error()
-    {
-        return view('public.404');
     }
+
+    public function jobApply(){
+        dd("working on it ..");
+    }
+
+
+
+
 
 }
