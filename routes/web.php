@@ -1,11 +1,12 @@
 <?php
 
 use App\Http\Controllers\Admin\CategoryController;
-use App\Http\Controllers\ContactController;
 use App\Http\Controllers\Admin\CompanyController;
 use App\Http\Controllers\Admin\JobController;
 use App\Http\Controllers\Admin\TestimonialController;
+use App\Http\Controllers\ContactController;
 use App\Http\Controllers\PublicController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -23,7 +24,7 @@ Route::group([
     Route::get('job-list', 'joblist')->name('joblist');
     Route::get('job-details/{id}', 'jobdetails')->name('jobdetails');
     Route::post('job-apply', 'jobApply')->name('apply_job');
-    
+    Route::get('jobs', 'jobs')->name('jobs');
 });
 
 //admin
@@ -82,13 +83,9 @@ Route::group(
         });
     });
 
-
-
-
 Auth::routes(['verify' => true]);
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
 
 Route::get('contactus', [PublicController::class, 'contact'])->name('contact.index');
 Route::post('contactus', [ContactController::class, 'send'])->name('contact.send');

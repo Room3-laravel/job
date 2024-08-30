@@ -8,12 +8,13 @@ use Illuminate\Database\Eloquent\Model;
 class Category extends Model
 {
     use HasFactory;
-    protected $fillable= [
+    protected $fillable = [
         'category_name',
         'image',
-        ];
+    ];
 
-        public function Job() {
-            return $this->hasOne(JobData::class);
+    public function Jobs()
+    {
+        return $this->hasMany(JobData::class, 'category_id', 'id');
     }
 }

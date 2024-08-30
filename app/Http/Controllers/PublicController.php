@@ -14,7 +14,7 @@ class PublicController extends Controller
         $jobs = JobData::where('published', 1)->get();
         $categories = Category::get();
         $testimonials = Testimonial::where('published', 1)->get();
-        return view('public.index',compact('testimonials','jobs','categories'));
+        return view('public.index', compact('testimonials', 'jobs', 'categories'));
     }
 
     public function about()
@@ -24,7 +24,7 @@ class PublicController extends Controller
 
     public function contact()
     {
-        
+
         return view('public.contact');
     }
 
@@ -37,13 +37,13 @@ class PublicController extends Controller
     public function testimonial()
     {
         $testimonials = Testimonial::where('published', 1)->get();
-        return view('public.testimonial',compact('testimonials'));
+        return view('public.testimonial', compact('testimonials'));
     }
 
     public function joblist()
     {
         $jobs = JobData::where('published', 1)->get();
-        return view('public.job-list',compact('jobs'));
+        return view('public.job-list', compact('jobs'));
     }
 
     public function jobdetails(String $id)
@@ -57,6 +57,15 @@ class PublicController extends Controller
     {
         dd("send email to the admin who has created the job");
     }
-    
 
+    public function jobs()
+    {
+        $categories = Category::with(['jobs' => function ($query) {
+            $query->where('published', 1)->latest()->take(3);
+        }])->latest()->limit(4)->get();
+
+        // dd($categories);
+
+        return view('public.jobs', compact('categories'));
+    }
 }

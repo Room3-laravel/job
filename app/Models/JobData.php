@@ -30,8 +30,9 @@ class JobData extends Model
     {
         return $this->belongsTo(Category::class);
     }
+    
     public function company()
     {
-        return $this->hasMany(Company::class);
+        return $this->belongsTo(Company::class);
     }
 }
