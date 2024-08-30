@@ -6,7 +6,7 @@ use App\Models\Category;
 use App\Models\Company;
 use App\Models\JobData;
 use App\Models\Testimonial;
-//use App\Models\User;
+use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
