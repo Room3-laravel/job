@@ -3,18 +3,23 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use App\Models\JobApply;
 use App\Models\JobData;
 use App\Models\Testimonial;
+use App\Traits\Common;
 use Illuminate\Http\Request;
 
 class PublicController extends Controller
 {
+    use Common;
     public function index()
     {
-        $jobs = JobData::where('published', 1)->get();
         $categories = Category::get();
         $testimonials = Testimonial::where('published', 1)->get();
-        return view('public.index',compact('testimonials','jobs','categories'));
+        $featured = JobData::with('company')->where('published', 1)->latest('like')->limit(5)->get();
+        $fullTime = JobData::where('published', 1)->where('job_nature','Full Time')->take(5)->get();
+        $partTime = JobData::where('published', 1)->where('job_nature','Part Time')->take(5)->get();
+        return view('public.index',compact('testimonials','categories','featured','fullTime','partTime'));
     }
 
     public function about()
@@ -24,7 +29,7 @@ class PublicController extends Controller
 
     public function contact()
     {
-        
+
         return view('public.contact');
     }
 
@@ -42,8 +47,11 @@ class PublicController extends Controller
 
     public function joblist()
     {
-        $jobs = JobData::where('published', 1)->get();
-        return view('public.job-list',compact('jobs'));
+        $featured = JobData::with('company')->where('published', 1)->latest('like')->limit(5)->get();
+        $fullTime = JobData::with('company')->where('published', 1)->where('job_nature','Full Time')->take(5)->get();
+        $partTime = JobData::with('company')->where('published', 1)->where('job_nature','Part Time')->take(5)->get();
+
+        return view('public.job-list',compact('featured','fullTime','partTime'));
     }
 
     public function jobdetails(String $id)
@@ -55,8 +63,30 @@ class PublicController extends Controller
 
     public function jobApply(Request $request)
     {
-        dd("send email to the admin who has created the job");
+        $data = $request->validate([
+            'name' => 'required|string',
+            'email' => 'required|email',
+            'website' => 'required|string',
+            'cv' => 'required|file',
+            'cover_letter' => 'required|string',
+
+        ]);
+        $data['cv']=$this->uploadFile($request->cv,'assets/cv');
+
+        JobApply::create($data);
+
+        return redirect()->route('index');
+
     }
-    
+    public function like(string $id){
+        $jobData=JobData::findOrFail($id);
+        $jobData->update([
+            'like'=>$jobData->like+1,
+        ]);
+        return redirect()->route('index');
+    }
+
+
+
 
 }

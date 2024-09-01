@@ -24,6 +24,7 @@ class JobData extends Model
         'published',
         'category_id',
         'company_id',
+        'like',
     ];
 
     public function category()
@@ -32,6 +33,6 @@ class JobData extends Model
     }
     public function company()
     {
-        return $this->hasMany(Company::class);
+        return $this->belongsTo(Company::class);
     }
 }

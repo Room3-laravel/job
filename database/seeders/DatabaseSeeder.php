@@ -20,9 +20,9 @@ class DatabaseSeeder extends Seeder
         // User::factory(5)->create();
         Company::factory(5)->create();
         Category::factory(5)->create();
-        JobData::factory(5)->create();
+        JobData::factory(10)->create();
         Testimonial::factory(5)->create();
-        
+
         // User::factory()->create([
         //     'name' => 'Test User',
         //     'email' => 'test@example.com',

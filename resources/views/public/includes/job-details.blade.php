@@ -3,7 +3,7 @@
         <div class="row gy-5 gx-4">
             <div class="col-lg-8">
                 <div class="d-flex align-items-center mb-5">
-                    <img class="flex-shrink-0 img-fluid border rounded" src="{{asset('assets/img/com-logo-2.jpg')}}" alt="" style="width: 80px; height: 80px;">
+                    <img class="flex-shrink-0 img-fluid border rounded" src="{{asset('assets/img/'.$job->image)}}" alt="" style="width: 80px; height: 80px;">
                     <div class="text-start ps-4">
                         <h3 class="mb-3">{{$job->title}}</h3>
                         <span class="text-truncate me-3"><i class="fa fa-map-marker-alt text-primary me-2"></i>{{$job->location}}</span>
@@ -53,7 +53,7 @@
                                 <input type="file" class="form-control bg-white" name="cv">
                             </div>
                             <div class="col-12">
-                                <textarea class="form-control" rows="5" placeholder="Coverletter" name="detalis"></textarea>
+                                <textarea class="form-control" rows="5" placeholder="Coverletter" name="cover_letter"></textarea>
                             </div>
                             <div class="col-12">
                                 <button class="btn btn-primary w-100" type="submit">Apply Now</button>
@@ -69,7 +69,7 @@
                     <p><i class="fa fa-angle-right text-primary me-2"></i>Published On:{{$job->created_at}}</p>
                     <p><i class="fa fa-angle-right text-primary me-2"></i>Vacancy: 123 Position</p>
                     <p><i class="fa fa-angle-right text-primary me-2"></i>Job Nature:  {{$job->job_nature}}</p>
-                    <p><i class="fa fa-angle-right text-primary me-2"></i>Salary: $123 - $456</p>
+                    <p><i class="fa fa-angle-right text-primary me-2"></i>Salary: ${{$job->salary_from}} - ${{$job->salary_to}}</p>
                     <p><i class="fa fa-angle-right text-primary me-2"></i>Location: {{$job->location}}</p>
                     <p class="m-0"><i class="fa fa-angle-right text-primary me-2"></i>Date Line: {{$job->date_line}}</p>
                 </div>

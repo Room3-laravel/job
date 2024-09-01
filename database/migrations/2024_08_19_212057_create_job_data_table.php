@@ -24,6 +24,7 @@ return new class extends Migration
             $table->string('qualification');
             $table->date('date_line');
             $table->boolean('published');
+            $table->integer('like')->default(0);
             $table->foreignId('category_id')->constrained('categories');
             $table->foreignId('company_id')->constrained('companies');
             $table->softDeletes();

@@ -23,7 +23,8 @@ Route::group([
     Route::get('job-list', 'joblist')->name('joblist');
     Route::get('job-details/{id}', 'jobdetails')->name('jobdetails');
     Route::post('job-apply', 'jobApply')->name('apply_job');
-    
+    Route::put('like/{job}', 'like')->name('job.like');
+
 });
 
 //admin

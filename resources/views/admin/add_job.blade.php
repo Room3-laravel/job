@@ -68,8 +68,10 @@
                         <label for=""
                             class="form-label col-md-2 fw-bold text-md-end">{{ __('jobs.job nature') }}</label>
                         <div class="col-md-10">
-                            <input type="text" step="0.1" placeholder="" class="form-control py-2"
-                                name="job_nature" value="{{ old('job_nature') }}" />
+                            <select name="job_nature">
+                                <option value="Full Time">Full Time</option>
+                                <option value="Part Time">Part Time</option>
+                            </select>
                             @error('job_nature')
                                 <div class="alert alert-warning">{{ $message }}</div>
                             @enderror

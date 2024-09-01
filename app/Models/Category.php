@@ -13,7 +13,7 @@ class Category extends Model
         'image',
         ];
 
-        public function Job() {
-            return $this->hasOne(JobData::class);
+        public function job() {
+            return $this->hasMany(JobData::class);
     }
 }

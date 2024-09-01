@@ -11,11 +11,11 @@ class Company extends Model
     protected $fillable=[
         'title',
         'description',
-        
+
     ];
     public function job()
     {
         return $this->hasMany(JobData::class);
     }
-    
+
 }
