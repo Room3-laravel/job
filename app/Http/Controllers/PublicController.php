@@ -55,7 +55,7 @@ class PublicController extends Controller
 
     public function jobdetails(String $id)
     {
-        $job = JobData::with('company')->findOrFail($id);
+        $job = JobData::findOrFail($id);
         //dd($job);
         return view('public.job-detail', compact('job'));
     }
@@ -86,7 +86,7 @@ class PublicController extends Controller
     }
 
     public function jobVariables(){
-        $featured = JobData::with('company')->where('published', 1)->where('featured',1)->get();
+        $featured = JobData::where('published', 1)->where('featured',1)->get();
         $fullTime = JobData::where('published', 1)->where('job_nature','Full Time')->get();
         $partTime = JobData::where('published', 1)->where('job_nature','Part Time')->get();
         $jobs=['featured'=>$featured,'fullTime'=>$fullTime,'partTime'=>$partTime];

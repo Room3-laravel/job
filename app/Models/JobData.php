@@ -32,8 +32,5 @@ class JobData extends Model
     {
         return $this->belongsTo(Category::class);
     }
-    public function company()
-    {
-        return $this->belongsTo(Company::class);
-    }
+
 }

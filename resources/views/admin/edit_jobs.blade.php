@@ -160,7 +160,7 @@
 
                         </div>
                     </div>
-                    <hr>
+                    {{-- <hr>
 
                     <div class="form-group mb-3 row">
                         <label for=""
@@ -182,7 +182,7 @@
                             </select>
 
                         </div>
-                    </div>
+                    </div> --}}
 
 
 

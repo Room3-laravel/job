@@ -5,14 +5,14 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Category;
-use App\Models\Company;
+// use App\Models\Company;
 use App\Models\JobData;
 use App\Traits\Common;
 
 
 
 class JobController extends Controller
-{   
+{
     use Common;
     /**
      * Display a listing of the resource.
@@ -29,9 +29,9 @@ class JobController extends Controller
      */
     public function create()
     {
-        $companies = Company::select('id','title')->get();
+        // $companies = Company::select('id','title')->get();
         $categories = Category::select('id','category_name')->get();
-        return view('admin.add_job',compact('categories','companies'));
+        return view('admin.add_job',compact('categories'));
     }
 
     /**
@@ -51,17 +51,17 @@ class JobController extends Controller
              'date_line' => 'required|date',
              'published' => 'boolean',
              'category_id'=> 'required|integer|exists:categories,id',
-             'company_id'=> 'required|integer|exists:companies,id',
+            //  'company_id'=> 'required|integer|exists:companies,id',
              'image' =>'required|mimes:png,jpg,jpeg|max:2048',
 
         ]);
-        
+
         if($request->hasFile('image')){
             $data['image'] = $this->uploadFile($request->image,'assets/img');
         }
 
        JobData::create($data);
-       
+
        return redirect()->route('jobs.index');
     }
 
@@ -81,8 +81,7 @@ class JobController extends Controller
     {
         $job = JobData::findOrfail($id);
         $categories = Category::select('id','category_name')->get();
-        $companies = Company::select('id','title')->get();
-        return view('admin.edit_jobs',compact('job','categories','companies'));
+        return view('admin.edit_jobs',compact('job','categories'));
 
     }
 
@@ -103,11 +102,11 @@ class JobController extends Controller
              'date_line' => 'required|date',
              'published' => 'boolean',
              'category_id'=> 'required|integer|exists:categories,id',
-             'company_id'=> 'required|integer|exists:companies,id',
+            //  'company_id'=> 'required|integer|exists:companies,id',
              'image' =>'sometimes|mimes:png,jpg,jpeg|max:2048',
 
         ]);
-        
+
         if($request->hasFile('image')){
             $data['image'] = $this->uploadFile($request->image,'assets/img');
         }
@@ -118,12 +117,45 @@ class JobController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Request $request)
+    public function destroy(string $id)
     {
-      $id = $request->id;
-      JobData::where('id',$id)->delete($id);
+
+      JobData::findOrFail($id)->delete($id);
       return redirect()->route('jobs.index');
-        
+
     }
-    
+
+    /**
+     * Show the deleted resource from storage.
+     */
+    public function showDeleted()
+    {
+
+        $jobs = JobData::onlyTrashed()->get();
+
+        return view('admin.trashed_jobs', compact('jobs'));
+
+    }
+
+     /**
+     * restore the trashed resource from storage.
+     */
+    public function restore(string $id)
+    {
+
+        JobData::where('id', $id)->restore();
+        return redirect()->route('jobs.showDeleted');
+
+    }
+    public function forcedelete(string $id){
+        $job=JobData::findOrFail($id);
+        $job->withTrashed()->forceDelete();
+        return redirect()->route('jobs.showDeleted');
+
+    }
+
+
+
+
+
 }

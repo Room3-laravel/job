@@ -49,7 +49,10 @@ Route::group(
                 Route::get('{id}/edit', 'edit')->name('edit');
                 Route::put('{id}/update', 'update')->name('update');
                 Route::delete('{id}/delete', 'destroy')->name('delete');
-                Route::delete('{id}/restore', 'restore')->name('restore');
+                Route::get('trashed', 'showDeleted')->name('showDeleted');
+                Route::patch('{id}/restore', 'restore')->name('restore');
+                Route::delete('{id}/force_delete', 'forcedelete')->name('forcedelete');
+
             });
 
             Route::group([
