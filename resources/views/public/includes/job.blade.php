@@ -21,7 +21,7 @@
             </ul>
             <div class="tab-content">
                 <div id="tab-1" class="tab-pane fade show p-0 active">
-                    @foreach ($featured as $job)
+                    @foreach ($jobs['featured'] as $job)
                     <div class="job-item p-4 mb-4">
 
                         <div class="row g-4">
@@ -59,7 +59,7 @@
 
 
                 <div id="tab-2" class="tab-pane fade show p-0">
-                    @foreach ($fullTime as $job)
+                    @foreach ($jobs['fullTime'] as $job)
                     <div class="job-item p-4 mb-4">
 
                         <div class="row g-4">
@@ -95,7 +95,7 @@
                     <a class="btn btn-primary py-3 px-5" href="{{ route('joblist') }}">Browse More Jobs</a>
                 </div>
                 <div id="tab-3" class="tab-pane fade show p-0">
-                    @foreach ($partTime as $job)
+                    @foreach ($jobs['partTime'] as $job)
                     <div class="job-item p-4 mb-4">
 
                         <div class="row g-4">

@@ -12,14 +12,15 @@ use Illuminate\Http\Request;
 class PublicController extends Controller
 {
     use Common;
+
+
     public function index()
     {
         $categories = Category::get();
         $testimonials = Testimonial::where('published', 1)->get();
-        $featured = JobData::with('company')->where('published', 1)->latest('like')->limit(5)->get();
-        $fullTime = JobData::where('published', 1)->where('job_nature','Full Time')->take(5)->get();
-        $partTime = JobData::where('published', 1)->where('job_nature','Part Time')->take(5)->get();
-        return view('public.index',compact('testimonials','categories','featured','fullTime','partTime'));
+        $jobs=$this->jobVariables();
+        // dd($jobs['featured']);
+        return view('public.index',compact('testimonials','categories','jobs'));
     }
 
     public function about()
@@ -47,11 +48,9 @@ class PublicController extends Controller
 
     public function joblist()
     {
-        $featured = JobData::with('company')->where('published', 1)->latest('like')->limit(5)->get();
-        $fullTime = JobData::with('company')->where('published', 1)->where('job_nature','Full Time')->take(5)->get();
-        $partTime = JobData::with('company')->where('published', 1)->where('job_nature','Part Time')->take(5)->get();
+        $jobs=$this->jobVariables();
 
-        return view('public.job-list',compact('featured','fullTime','partTime'));
+        return view('public.job-list',compact('jobs'));
     }
 
     public function jobdetails(String $id)
@@ -86,7 +85,13 @@ class PublicController extends Controller
         return redirect()->route('index');
     }
 
-
+    public function jobVariables(){
+        $featured = JobData::with('company')->where('published', 1)->where('featured',1)->get();
+        $fullTime = JobData::where('published', 1)->where('job_nature','Full Time')->get();
+        $partTime = JobData::where('published', 1)->where('job_nature','Part Time')->get();
+        $jobs=['featured'=>$featured,'fullTime'=>$fullTime,'partTime'=>$partTime];
+        return $jobs;
+    }
 
 
 }

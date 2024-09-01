@@ -25,6 +25,7 @@ class JobData extends Model
         'category_id',
         'company_id',
         'like',
+        'featured',
     ];
 
     public function category()
