@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('title');
             $table->string('image');
-            $table->string('description');
+            $table->text('description');
             $table->string('responsability');
             $table->string('job_nature');
             $table->string('location');
@@ -25,6 +25,8 @@ return new class extends Migration
             $table->date('date_line');
             $table->boolean('published');
             $table->foreignId('category_id')->constrained('categories');
+            $table->foreignId('company_id')->constrained('companies');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

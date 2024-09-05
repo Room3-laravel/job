@@ -1,16 +1,15 @@
 @extends('public.layouts.main')
-@push('pageTitle')
+@push('pagetitle')
 category
 @endpush
 @section('content')
         <!-- Header End -->
-        @include('public.includes.header-cat')
+        @include('public.includes.header')
         <!-- Header End -->
-@endsection
-@section('page')
+
 
         <!-- Category Start -->
-        @include('public.includes.category1')
+        @include('public.includes.category')
         <!-- Category End -->
  @endsection
 

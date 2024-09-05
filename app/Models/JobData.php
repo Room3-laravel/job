@@ -1,14 +1,16 @@
 <?php
-
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class JobData extends Model
 {
     use HasFactory;
-    protected $fillable =[
+    use SoftDeletes;
+
+    protected $fillable = [
         'title',
         'image',
         'description',
@@ -21,8 +23,16 @@ class JobData extends Model
         'date_line',
         'published',
         'category_id',
-     ];
-     public function category() {
-      return $this->belongsTo(Category::class);
-}
+        'company_id',
+    ];
+
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
+    }
+    
+    public function company()
+    {
+        return $this->belongsTo(Company::class);
+    }
 }
