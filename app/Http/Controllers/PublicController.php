@@ -11,6 +11,7 @@ class PublicController extends Controller
     {
         return view('public.index');
     }
+    
     public function about()
     {
         return view('public.about');
